@@ -1,0 +1,6 @@
+[submodule "packages/client-side"]
+	path = packages/client-side
+	url = git@github.com:LTD-Via-corpvs/gerador-de-api-client.git
+[submodule "packages/server-side"]
+	path = packages/server-side
+	url = git@github.com:LTD-Via-corpvs/gerador-de-api-server.git
