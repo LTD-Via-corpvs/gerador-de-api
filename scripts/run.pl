@@ -23,7 +23,7 @@ sub run_app {
     if (!$python) {
         die "Python is not installed on the machine.\n";
     }
-
+    
     my $package_manager = command_exist('pnpm') || command_exist('bun') || command_exist('yarn') || command_exist('npm');
     if (!$package_manager) {
         die "Package Manager is not installed on the machine.\n";

@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+case "$1" in
+    "i" | "init")
+        scripts/init.sh
+    ;;
+    "r" | "run")
+        perl "scripts/run.pl"
+    ;;
+    *)
+        echo "Uran build tool command. This provides a variety of commands to control the Uran (generator api tool)."
+        echo "View below for details of the available commands."
+        echo ""
+        echo "Commands:"
+        echo "  * i, init          | Init submodules and config them."
+        echo "  * r, run          | Run system."
+    ;;
+esac

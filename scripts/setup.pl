@@ -48,13 +48,13 @@ sub setup_python {
         $activate_venv = File::Spec->catfile($venv_path, 'bin', 'activate');
     }
 
-    my @dependencies = ('flask');
+    my $requirements_file = File::Spec->catfile($venv_path, '..', 'requirements.txt');
 
     my $install_deps_cmd;
     if ($^O eq 'MSWin32') {
-        $install_deps_cmd = "cmd /c \"$activate_venv\" && pip install " . join(' ', @dependencies) . "\"";
+        $install_deps_cmd = "cmd /c \"$activate_venv\" && pip install -r \"$requirements_file\"";
     } else {
-        $install_deps_cmd = ". \"$activate_venv\" && pip install " . join(' ', @dependencies);
+        $install_deps_cmd = ". \"$activate_venv\" && pip install -r \"$requirements_file\"";
     }
 
     system($install_deps_cmd) == 0
