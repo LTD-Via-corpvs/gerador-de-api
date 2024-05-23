@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl bash
 use strict;
 use warnings;
 use File::Spec;

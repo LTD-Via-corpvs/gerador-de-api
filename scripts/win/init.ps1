@@ -3,26 +3,39 @@
 Write-Output "Init submodules..."
 git submodule update --init --remote --recursive
 
-# OS specific support
-$windows = $false
-$os = [System.Environment]::OSVersion.Platform
-switch ($os) {
-    2 { $windows = $true } # Windows
+function Install-Chocolatey {
+    Write-Output "Chocolatey is not installed. Installing Chocolatey..."
+    ".\chocolatey.ps1"
 }
 
 function Install-Perl {
     Write-Output "Installing Perl..."
-    if ($windows) {
-        if (Get-Command "choco" -ErrorAction SilentlyContinue) {
-            choco install -y strawberryperl
-        } else {
-            Write-Output "Chocolatey is not installed. Installing Chocolatey..."
-            ".\chocolatey.ps1"
-            choco install -y strawberryperl
-        }
+    if (Get-Command "choco" -ErrorAction SilentlyContinue) {
+        choco install -y strawberryperl
     } else {
-        Write-Output "Operating system not supported."
-        exit 1
+        Install-Chocolatey
+        choco install -y strawberryperl
+    }
+}
+
+function Install-Python {
+    Write-Output "Installing Python..."
+    if (Get-Command "choco" -ErrorAction SilentlyContinue) {
+        choco install -y python311
+    } else {
+        Install-Chocolatey
+        choco install -y python311
+    }
+}
+
+function Install-Node {
+    Write-Output "Installing NodeJS..."
+    if (Get-Command "fnm" -ErrorAction SilentlyContinue) {
+        "fnm use --install-if-missing 20"
+    } else {
+        Write-Output "FNM(Fast Node Manager) is not installed. Installing FNM(Fast Node Manager)..."
+        ".\fnm.ps1"
+        "fnm use --install-if-missing 20"
     }
 }
 
@@ -31,6 +44,20 @@ if (Get-Command "perl" -ErrorAction SilentlyContinue) {
     Write-Output "Perl found."
 } else {
     Install-Perl
+}
+
+Write-Output "Checking Python..."
+if (Get-Command "python" -ErrorAction SilentlyContinue) {
+    Write-Output "Python found."
+} else {
+    Install-Python
+}
+
+Write-Output "Checking Node..."
+if (Get-Command "node" -ErrorAction SilentlyContinue) {
+    Write-Output "Node found."
+} else {
+    Install-Node
 }
 
 Write-Output "Executing setup script..."

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Repositório principal que junta o lado cliente com o servidor.",
   "scripts": {
-    "dev": "pnpm run --filter \"./packages\" --parallel dev"
+    "dev": "pnpm run --filter \"./packages/*\" --parallel dev"
   },
   "author": "Aaron, João Pedro e Mateus",
   "license": "ISC"

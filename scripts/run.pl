@@ -48,6 +48,8 @@ sub run_app {
 
     system($exec_dev_cmd) == 0
         or die "Failed to execute command: $!\n";
+    
+    
 }
 
 run_app();

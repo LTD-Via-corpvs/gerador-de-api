@@ -2,7 +2,7 @@
 
 case "$1" in
     "i" | "init")
-        scripts/unix/init.sh
+        bash scripts/unix/init.sh
     ;;
     "r" | "run")
         perl "scripts/run.pl"
