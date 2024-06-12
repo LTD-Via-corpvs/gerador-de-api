@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use File::Spec;
+use File::Copy;
 use Cwd;
 use Config;
 
@@ -84,6 +85,11 @@ sub setup_next {
         or die "[Client-Side] Failed to install dependencies: $!\n";
 
     print "[Client-Side] Dependencies installed successfully.\n";
+    print "[Client-Side] Creating .env file.\n";
+
+    my $input_file = File::Spec->catfile($client_path, '.env.example');
+    my $output_file = File::Spec->catfile($client_path, '.env');
+    copy($input_file, $output_file);
 }
 
 setup_python();
